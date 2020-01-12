@@ -1,6 +1,6 @@
 Name:           xonsh
 Version:        0.9.13
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A general purpose, Python-ish shell
 
 # xonsh is BSD-2-Clause.
@@ -9,6 +9,8 @@ License:        BSD and MIT
 URL:            https://xon.sh
 # Source0:        %pypi_source
 Source0:	https://github.com/xonsh/xonsh/releases/download/%{version}/xonsh-%{version}.tar.gz
+Source1:	https://raw.githubusercontent.com/t0fik/copr-xonsh/master/sources/65-xonsh.conf
+Source2:	https://raw.githubusercontent.com/t0fik/copr-xonsh/master/sources/xonsh-session
 BuildArch:      noarch
 
 BuildRequires:  python3-devel
@@ -50,6 +52,11 @@ sed --in-place "s:#!\s*/usr.*::" xonsh/xoreutils/_which.py
 pathfix.py -i "%{__python3} %{py3_shbang_opts}u" -p -n %{buildroot}%{_bindir}/xonsh
 pathfix.py -i "%{__python3} %{py3_shbang_opts}u" -p -n %{buildroot}%{_bindir}/xonsh-cat
 
+install -d %{buildroot}%{_sbindir}
+install -d %{buildroot}%{_datadir}/lightdm/lightdm.conf.d
+install -pm 0755 %{SOURCE2} %{buildroot}%{_sbindir}/
+install -pm 0644 %{SOURCE1} %{buildroot}%{_datadir}/lightdm/lightdm.conf.d/
+
 %check
 # The tests only succeed if:
 #
@@ -89,8 +96,13 @@ fi
 %{python3_sitelib}/xonsh/
 %{python3_sitelib}/xontrib/
 %{python3_sitelib}/xonsh-%{version}-py?.?.egg-info/
+%{_datadir}/lightdm/lightdm.conf.d/65-xonsh.conf
+%{_sbindir}/xonsh-session
 
 %changelog
+* Sun Jan 12 2020 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 0.9.13-2
+- Added session wrapper script and related config
+
 * Sun Jan 12 2020 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 0.9.13-1
 - new version
 
