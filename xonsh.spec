@@ -7,8 +7,7 @@ Summary:        A general purpose, Python-ish shell
 # xonsh/winutils.py and xonsh/xoreutils/_which.py contain MIT code.
 License:        BSD and MIT
 URL:            https://xon.sh
-# Source0:        %pypi_source
-Source0:	https://github.com/xonsh/xonsh/releases/download/%{version}/xonsh-%{version}.tar.gz
+Source0:        %pypi_source
 Source1:	https://raw.githubusercontent.com/t0fik/copr-xonsh/master/src/65-xonsh.conf
 Source2:	https://raw.githubusercontent.com/t0fik/copr-xonsh/master/src/xonsh-session
 BuildArch:      noarch
@@ -95,7 +94,7 @@ fi
 %{_bindir}/xonsh-cat
 %{python3_sitelib}/xonsh/
 %{python3_sitelib}/xontrib/
-%{python3_sitelib}/xonsh-%{version}-py?.?.egg-info/
+%{python3_sitelib}/xonsh-%{version}*-py?.?.egg-info/
 %{_datadir}/lightdm/lightdm.conf.d/65-xonsh.conf
 %{_sbindir}/xonsh-session
 
