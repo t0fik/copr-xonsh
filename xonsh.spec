@@ -9,8 +9,8 @@ License:        BSD and MIT
 URL:            https://xon.sh
 # Source0:        %pypi_source
 Source0:	https://github.com/xonsh/xonsh/releases/download/%{version}/xonsh-%{version}.tar.gz
-Source1:	https://raw.githubusercontent.com/t0fik/copr-xonsh/master/sources/65-xonsh.conf
-Source2:	https://raw.githubusercontent.com/t0fik/copr-xonsh/master/sources/xonsh-session
+Source1:	https://raw.githubusercontent.com/t0fik/copr-xonsh/master/src/65-xonsh.conf
+Source2:	https://raw.githubusercontent.com/t0fik/copr-xonsh/master/src/xonsh-session
 BuildArch:      noarch
 
 BuildRequires:  python3-devel
