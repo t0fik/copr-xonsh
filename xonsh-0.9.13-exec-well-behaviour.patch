@@ -65,7 +65,7 @@ index 47502f17..a3c67cb5 100644
 -            )
 +
 +    try:
-+        os.execvpe(args[0], args, denv)
++        os.execvpe(args[0], args.command, denv)
 +    except FileNotFoundError as e:
 +        return (
 +            None,
