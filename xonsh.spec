@@ -1,6 +1,6 @@
 Name:           xonsh
 Version:        0.9.13
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        A general purpose, Python-ish shell
 
 # xonsh is BSD-2-Clause.
@@ -8,8 +8,10 @@ Summary:        A general purpose, Python-ish shell
 License:        BSD and MIT
 URL:            https://xon.sh
 Source0:        %pypi_source
-Source1:	https://raw.githubusercontent.com/t0fik/copr-xonsh/master/src/65-xonsh.conf
-Source2:	https://raw.githubusercontent.com/t0fik/copr-xonsh/master/src/xonsh-session
+Source1:        65-xonsh.conf
+Source2:        xonsh-session
+Patch0:         xonsh-0.9.13-exec-well-behaviour.patch
+
 BuildArch:      noarch
 
 BuildRequires:  python3-devel
@@ -36,6 +38,7 @@ and novices alike.
 
 %prep
 %autosetup -n %{name}-%{version}
+%patch0 -p0
 
 %build
 # Remove shebang.
@@ -99,6 +102,10 @@ fi
 %{_sbindir}/xonsh-session
 
 %changelog
+* Thu Jan 14 2020 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 0.9.13-3
+- -l switch well behaviour
+- exec implements all switches from bash/zsh
+
 * Sun Jan 12 2020 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 0.9.13-2
 - Added session wrapper script and related config
 

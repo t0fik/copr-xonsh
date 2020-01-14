@@ -39,5 +39,5 @@ if [ -d "$xsessionddir" ]; then
 fi
 
 dde=$(which $1)
-exec $SSH_AGENT /bin/sh -c "exec -l $dde"
+exec $SSH_AGENT /bin/sh -c "exec $SHELL -l -c 'exec $dde'"
 
