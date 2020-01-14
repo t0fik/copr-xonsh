@@ -37,8 +37,7 @@ primitives. xonsh (pronounced *conch*) is meant for the daily use of experts
 and novices alike.
 
 %prep
-%autosetup -n %{name}-%{version}
-%patch0 -p0
+%autosetup -n %{name}-%{version} -p 1
 
 %build
 # Remove shebang.
@@ -102,7 +101,7 @@ fi
 %{_sbindir}/xonsh-session
 
 %changelog
-* Thu Jan 14 2020 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 0.9.13-3
+* Tue Jan 14 2020 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 0.9.13-3
 - -l switch well behaviour
 - exec implements all switches from bash/zsh
 
