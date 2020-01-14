@@ -1,6 +1,6 @@
 Name:           xonsh
 Version:        0.9.13
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        A general purpose, Python-ish shell
 
 # xonsh is BSD-2-Clause.
@@ -11,6 +11,7 @@ Source0:        %pypi_source
 Source1:        65-xonsh.conf
 Source2:        xonsh-session
 Patch0:         xonsh-0.9.13-exec-well-behaviour.patch
+Patch1:         xonsh-0.9.13-update-amalgam.patch
 
 BuildArch:      noarch
 
@@ -101,6 +102,9 @@ fi
 %{_sbindir}/xonsh-session
 
 %changelog
+* Tue Jan 14 2020 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 0.9.13-4
+- __amalgam__ file updated
+
 * Tue Jan 14 2020 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 0.9.13-3
 - -l switch well behaviour
 - exec implements all switches from bash/zsh
