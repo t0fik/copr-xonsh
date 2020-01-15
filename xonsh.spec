@@ -1,6 +1,6 @@
 Name:           xonsh
 Version:        0.9.13
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        A general purpose, Python-ish shell
 
 # xonsh is BSD-2-Clause.
@@ -102,6 +102,9 @@ fi
 %{_sbindir}/xonsh-session
 
 %changelog
+* Wed Jan 15 2020 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 0.9.13-7
+- Added checking dash existance in sys.argv[0]
+
 * Wed Jan 15 2020 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 0.9.13-6
 - Fixed passing command in xexec
 

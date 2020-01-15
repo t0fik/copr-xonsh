@@ -1,5 +1,5 @@
 diff --git a/xonsh/aliases.py b/xonsh/aliases.py
-index 47502f17..a3c67cb5 100644
+index 47502f17..7af245ef 100644
 --- a/xonsh/aliases.py
 +++ b/xonsh/aliases.py
 @@ -609,7 +609,7 @@ def source_cmd(args, stdin=None):
@@ -76,7 +76,7 @@ index 47502f17..a3c67cb5 100644
  
  class AWitchAWitch(argparse.Action):
 diff --git a/xonsh/main.py b/xonsh/main.py
-index 45ab31a9..49189121 100644
+index 45ab31a9..8c05ab93 100644
 --- a/xonsh/main.py
 +++ b/xonsh/main.py
 @@ -292,7 +292,7 @@ def start_services(shell_kwargs, args):
@@ -88,3 +88,13 @@ index 45ab31a9..49189121 100644
          #  Don't load xonshrc if not interactive shell
          rc = None
      events.on_pre_rc.fire()
+@@ -329,7 +329,8 @@ def premain(argv=None):
+         "cacheall": args.cacheall,
+         "ctx": builtins.__xonsh__.ctx,
+     }
+-    if args.login:
++    if args.login or sys.argv[0].startswith('-'):
++        args.login = True
+         shell_kwargs["login"] = True
+     if args.norc:
+         shell_kwargs["rc"] = ()

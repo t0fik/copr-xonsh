@@ -1,6 +1,6 @@
 diff -Naur xonsh-0.9.13_orig/xonsh/__amalgam__.py xonsh-0.9.13/xonsh/__amalgam__.py
---- xonsh-0.9.13_orig/xonsh/__amalgam__.py	2019-10-15 23:15:00.000000000 +0200
-+++ xonsh-0.9.13/xonsh/__amalgam__.py	2020-01-14 22:29:01.657000000 +0100
+--- xonsh-0.9.13_orig/xonsh/__amalgam__.py	2020-01-15 18:34:16.891000000 +0100
++++ xonsh-0.9.13/xonsh/__amalgam__.py	2020-01-15 18:36:21.998000000 +0100
 @@ -21251,7 +21251,7 @@
  
  
@@ -64,7 +64,7 @@ diff -Naur xonsh-0.9.13_orig/xonsh/__amalgam__.py xonsh-0.9.13/xonsh/__amalgam__
 -            )
 +
 +    try:
-+        os.execvpe(command, args.command, denv)
++        os.execvpe(args[0], args, denv)
 +    except FileNotFoundError as e:
 +        return (
 +            None,
@@ -83,3 +83,13 @@ diff -Naur xonsh-0.9.13_orig/xonsh/__amalgam__.py xonsh-0.9.13/xonsh/__amalgam__
          #  Don't load xonshrc if not interactive shell
          rc = None
      events.on_pre_rc.fire()
+@@ -23945,7 +23973,8 @@
+         "cacheall": args.cacheall,
+         "ctx": builtins.__xonsh__.ctx,
+     }
+-    if args.login:
++    if args.login or sys.argv[0].startswith('-'):
++        args.login = True
+         shell_kwargs["login"] = True
+     if args.norc:
+         shell_kwargs["rc"] = ()
