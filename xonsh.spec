@@ -1,6 +1,6 @@
 Name:           xonsh
 Version:        0.9.13
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        A general purpose, Python-ish shell
 
 # xonsh is BSD-2-Clause.
@@ -38,7 +38,7 @@ primitives. xonsh (pronounced *conch*) is meant for the daily use of experts
 and novices alike.
 
 %prep
-%autosetup -n %{name}-%{version} -p 1
+%autosetup -p1 -n %{name}-%{version}
 
 %build
 # Remove shebang.
@@ -102,6 +102,9 @@ fi
 %{_sbindir}/xonsh-session
 
 %changelog
+* Wed Jan 15 2020 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 0.9.13-6
+- Fixed passing command in xexec
+
 * Tue Jan 14 2020 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 0.9.13-5
 - Fixed args passing in xexec
 
