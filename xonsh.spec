@@ -1,6 +1,6 @@
 Name:           xonsh
 Version:        0.9.13
-Release:        7%{?dist}
+Release:        8%{?dist}
 Summary:        A general purpose, Python-ish shell
 
 # xonsh is BSD-2-Clause.
