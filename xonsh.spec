@@ -102,6 +102,9 @@ fi
 %{_sbindir}/xonsh-session
 
 %changelog
+* Thu Jan 16 2020 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 0.9.13-8
+- Fixed amalgam patch
+
 * Wed Jan 15 2020 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 0.9.13-7
 - Added checking dash existance in sys.argv[0]
 
