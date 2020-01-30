@@ -1,6 +1,6 @@
 Name:           xonsh
 Version:        0.9.13
-Release:        8%{?dist}
+Release:        9%{?dist}
 Summary:        A general purpose, Python-ish shell
 
 # xonsh is BSD-2-Clause.
@@ -102,6 +102,9 @@ fi
 %{_sbindir}/xonsh-session
 
 %changelog
+* Thu Jan 30 2020 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 0.9.13-9
+- Fixed exec -a switch behaviour
+
 * Thu Jan 16 2020 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 0.9.13-8
 - Fixed amalgam patch
 

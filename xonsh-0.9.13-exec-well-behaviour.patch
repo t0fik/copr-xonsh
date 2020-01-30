@@ -48,7 +48,7 @@ index 47502f17..7af245ef 100644
 +
 +    command = args.command[0]
 +    if args.name is not None:
-+        args.command.insert(0, args.name)
++        args.command[0] = args.name
 +    if args.login:
 +        args.command[0] = '-{}'.format(args.command[0])
 +
