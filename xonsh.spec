@@ -104,7 +104,7 @@ fi
 %{_sbindir}/xonsh-session
 
 %changelog
-* Sun Jan 12 2020 Jerzy Drozdz <jerzy.drozdz@jdsieci.pl> - 0.9.16-1.1
+* Wed Apr 08 2020 Jerzy Drozdz <jerzy.drozdz@jdsieci.pl> - 0.9.16-1.1
 - new version
 
 * Thu Jan 30 2020 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 0.9.13-9
