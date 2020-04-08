@@ -1,6 +1,6 @@
 Name:           xonsh
-Version:        0.9.13
-Release:        9%{?dist}
+Version:        0.9.16
+Release:        1.1%{?dist}
 Summary:        A general purpose, Python-ish shell
 
 # xonsh is BSD-2-Clause.
@@ -8,15 +8,13 @@ Summary:        A general purpose, Python-ish shell
 License:        BSD and MIT
 URL:            https://xon.sh
 Source0:        %pypi_source
-Source1:        65-xonsh.conf
-Source2:        xonsh-session
-Patch0:         xonsh-0.9.13-exec-well-behaviour.patch
-Patch1:         xonsh-0.9.13-update-amalgam.patch
+Source1:	65-xonsh.conf
+Source2:	xonsh-session
 
 BuildArch:      noarch
 
-BuildRequires:  python3-devel
-BuildRequires:  python3-setuptools
+BuildRequires:  python%{python3_pkgversion}-devel
+BuildRequires:  python%{python3_pkgversion}-setuptools
 BuildRequires:  %{py3_dist ply}
 BuildRequires:  %{py3_dist prompt-toolkit}
 BuildRequires:  %{py3_dist pygments}
@@ -38,7 +36,7 @@ primitives. xonsh (pronounced *conch*) is meant for the daily use of experts
 and novices alike.
 
 %prep
-%autosetup -p1 -n %{name}-%{version}
+%autosetup -n %{name}-%{version}
 
 %build
 # Remove shebang.
@@ -66,6 +64,10 @@ install -pm 0644 %{SOURCE1} %{buildroot}%{_datadir}/lightdm/lightdm.conf.d/
 # - They are run with the `py.test-3` executable instead of `python3 -m pytest`.
 #
 # The run-tests.xsh script does those things for us.
+
+if [ "%{python3_version_nodots}" -ge "38" ]; then
+  sed --in-place "s:ignores = \[\]:ignores = \['--ignore', 'tests/test_parser.py'\]:" run-tests.xsh
+fi
 
 sed --in-place "s:pytest:py.test-3:" run-tests.xsh
 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=%{buildroot}%{python3_sitelib} PATH="%{buildroot}%{_bindir}:$PATH" %{buildroot}%{_bindir}/xonsh run-tests.xsh
@@ -102,6 +104,9 @@ fi
 %{_sbindir}/xonsh-session
 
 %changelog
+* Sun Jan 12 2020 Jerzy Drozdz <jerzy.drozdz@jdsieci.pl> - 0.9.16-1.1
+- new version
+
 * Thu Jan 30 2020 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 0.9.13-9
 - Fixed exec -a switch behaviour
 
