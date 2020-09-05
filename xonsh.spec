@@ -1,6 +1,6 @@
 Name:           xonsh
 Version:        0.9.21
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A general purpose, Python-ish shell
 
 # xonsh is BSD-2-Clause.
@@ -10,6 +10,7 @@ URL:            https://xon.sh
 Source0:        %pypi_source
 Source1:	65-xonsh.conf
 Source2:	xonsh-session
+Source3:	xonsh-test-env-requirements.py
 
 BuildArch:      noarch
 
@@ -19,6 +20,8 @@ BuildRequires:  %{py3_dist ply}
 BuildRequires:  %{py3_dist prompt-toolkit}
 BuildRequires:  %{py3_dist pygments}
 BuildRequires:  %{py3_dist pytest}
+BuildRequires:	%{py3_dist distro}
+BuildRequires:	%{py3_dist virtualenv}
 BuildRequires:  git
 BuildRequires:  man-db
 Requires:       python3 >= 3.4
@@ -65,12 +68,24 @@ install -pm 0644 %{SOURCE1} %{buildroot}%{_datadir}/lightdm/lightdm.conf.d/
 #
 # The run-tests.xsh script does those things for us.
 
+pytest_ver=$(%{__python3} -Ic 'import sys; from pkg_resources import get_distribution; sys.stdout.write("".join(get_distribution("pytest").version.split(".")[:2]))')
+
+if [ "$pytest_ver" -lt "54" ]; then
+  %{__python3} %{SOURCE3} --output test-requirements.txt ply prompt_toolkit pygments distro
+  virtualenv venv
+  . venv/bin/activate
+  pip install -r test-requirements.txt
+fi
+
 if [ "%{python3_version_nodots}" -ge "38" ]; then
   sed --in-place "s:ignores = \[\]:ignores = \['--ignore', 'tests/test_parser.py'\]:" run-tests.xsh
 fi
 
-sed --in-place "s:pytest:py.test-3:" run-tests.xsh
-PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=%{buildroot}%{python3_sitelib} PATH="%{buildroot}%{_bindir}:$PATH" %{buildroot}%{_bindir}/xonsh run-tests.xsh
+# Disable flake8 checks
+sed --in-place "s:.*flake8:# &:" run-tests.xsh
+
+# sed --in-place "s:pytest:py.test-3:" run-tests.xsh
+PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=%{buildroot}%{python3_sitelib} PATH="%{buildroot}%{_bindir}:$PATH" python3 -su %{buildroot}%{_bindir}/xonsh -- run-tests.xsh
 
 %post
 if [ "$1" -ge 1 ]; then
@@ -104,6 +119,9 @@ fi
 %{_sbindir}/xonsh-session
 
 %changelog
+* Sat Sep 05 2020 Jerzy Drozdz <jerzy.droxdz@jdsieci.pl> - 0.9.21-2
+- Tests run in virtual environment if system installed pytest version is <5.4
+
 * Fri Sep 04 2020 Jerzy Drozdz <jerzy.drozdz@jdsieci.pl> - 0.9.21-1
 - new version
 
