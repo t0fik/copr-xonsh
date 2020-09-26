@@ -1,6 +1,6 @@
 Name:           xonsh
-Version:        0.9.21
-Release:        2%{?dist}
+Version:        0.9.22
+Release:        1%{?dist}
 Summary:        A general purpose, Python-ish shell
 
 # xonsh is BSD-2-Clause.
@@ -119,6 +119,9 @@ fi
 %{_sbindir}/xonsh-session
 
 %changelog
+* Sat Sep 26 2020 Jerzy Drozdz <jerzy.drozdz@jdsieci.pl> - 0.9.22-1
+- new version
+
 * Sat Sep 05 2020 Jerzy Drozdz <jerzy.droxdz@jdsieci.pl> - 0.9.21-2
 - Tests run in virtual environment if system installed pytest version is <5.4
 
