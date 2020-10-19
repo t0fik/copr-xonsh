@@ -17,7 +17,7 @@ BuildArch:      noarch
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
 BuildRequires:  %{py3_dist ply}
-BuildRequires:  %{py3_dist prompt-toolkit}
+BuildRequires:  %{py3_dist prompt-toolkit} >= 3.0.7
 BuildRequires:  %{py3_dist pygments}
 BuildRequires:  %{py3_dist pytest}
 BuildRequires:	%{py3_dist distro}
@@ -26,7 +26,7 @@ BuildRequires:  git
 BuildRequires:  man-db
 Requires:       python3 >= 3.4
 Requires:       %{py3_dist ply}
-Requires:       %{py3_dist prompt-toolkit}
+Requires:       %{py3_dist prompt-toolkit} >= 3.0.7
 Requires:       %{py3_dist setproctitle}
 Requires:       %{py3_dist pygments}
 Requires:       %{py3_dist distro}
