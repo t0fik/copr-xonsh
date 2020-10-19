@@ -1,5 +1,5 @@
 Name:           xonsh
-Version:        0.9.22
+Version:        0.9.24
 Release:        1%{?dist}
 Summary:        A general purpose, Python-ish shell
 
@@ -22,6 +22,7 @@ BuildRequires:  %{py3_dist pygments}
 BuildRequires:  %{py3_dist pytest}
 BuildRequires:	%{py3_dist distro}
 BuildRequires:	%{py3_dist virtualenv}
+BuildRequires:  %{py3_dist mypy}
 BuildRequires:  git
 BuildRequires:  man-db
 Requires:       python3 >= 3.4
@@ -71,7 +72,7 @@ install -pm 0644 %{SOURCE1} %{buildroot}%{_datadir}/lightdm/lightdm.conf.d/
 pytest_ver=$(%{__python3} -Ic 'import sys; from pkg_resources import get_distribution; sys.stdout.write("".join(get_distribution("pytest").version.split(".")[:2]))')
 
 if [ "$pytest_ver" -lt "54" ]; then
-  %{__python3} %{SOURCE3} --output test-requirements.txt ply prompt_toolkit pygments distro
+  %{__python3} %{SOURCE3} --output test-requirements.txt ply prompt_toolkit pygments distro mypy
   virtualenv venv
   . venv/bin/activate
   pip install -r test-requirements.txt
@@ -119,11 +120,12 @@ fi
 %{_sbindir}/xonsh-session
 
 %changelog
-* Mon Oct 19 2020 Jerzy Drozdz <jerzy.drozdz@jdsieci.pl> - 0.9.22-2
-- Xonsh now requires prompt-toolkit >= 3.0
-
-* Sat Sep 26 2020 Jerzy Drozdz <jerzy.drozdz@jdsieci.pl> - 0.9.22-1
+* Mon Oct 19 2020 Jerzy Drozdz <jerzy.drozdz@jdsieci.pl> - 0.9.24-1
 - new version
+
+* Mon Oct 19 2020 Jerzy Drozdz <jerzy.drozdz@jdsieci.pl> - 0.9.22-1
+- new version
+- Xonsh now requires prompt-toolkit >= 3.0
 
 * Sat Sep 05 2020 Jerzy Drozdz <jerzy.droxdz@jdsieci.pl> - 0.9.21-2
 - Tests run in virtual environment if system installed pytest version is <5.4
