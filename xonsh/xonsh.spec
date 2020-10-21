@@ -8,9 +8,9 @@ Summary:        A general purpose, Python-ish shell
 License:        BSD and MIT
 URL:            https://xon.sh
 Source0:        %pypi_source
-Source1:	65-xonsh.conf
-Source2:	xonsh-session
-Source3:	xonsh-test-env-requirements.py
+Source1:        65-xonsh.conf
+Source2:        xonsh-session
+Source3:        xonsh-test-env-requirements.py
 
 BuildArch:      noarch
 
@@ -20,11 +20,14 @@ BuildRequires:  %{py3_dist ply}
 BuildRequires:  %{py3_dist prompt-toolkit} >= 3.0
 BuildRequires:  %{py3_dist pygments}
 BuildRequires:  %{py3_dist pytest}
-BuildRequires:	%{py3_dist distro}
-BuildRequires:	%{py3_dist virtualenv}
+BuildRequires:  %{py3_dist distro}
+BuildRequires:  %{py3_dist virtualenv}
 BuildRequires:  %{py3_dist mypy}
 BuildRequires:  git
 BuildRequires:  man-db
+%if 0%{?fedora} && 0%{?fedora} < 33
+BuildRequires:  gcc
+%endif
 Requires:       python3 >= 3.4
 Requires:       %{py3_dist ply}
 Requires:       %{py3_dist prompt-toolkit} >= 3.0
