@@ -1,5 +1,5 @@
 Name:           xonsh
-Version:        0.9.24
+Version:        0.10.1
 Release:        1%{?dist}
 Summary:        A general purpose, Python-ish shell
 
@@ -123,6 +123,9 @@ fi
 %{_sbindir}/xonsh-session
 
 %changelog
+* Sun Nov 07 2021 Jerzy Drozdz <jerzy.drozdz@jdsieci.pl> - 0.10.1-1
+- update to upstream
+
 * Mon Oct 19 2020 Jerzy Drozdz <jerzy.drozdz@jdsieci.pl> - 0.9.24-1
 - new version
 
