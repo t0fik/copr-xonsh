@@ -1,0 +1,43 @@
+#!/usr/bin/bash
+#
+#   Xsession script for users which use xnosh as login shell
+#
+#   Copyright (c) 2020 Jerzy Drozdz (t0fik)
+#
+#   This program is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with this program. If not, see <http://www.gnu.org/licenses/>.
+#
+
+
+if [[ $1 == "/usr/bin/startdde" ]];then
+    exec /etc/sbin/deepin-session $@
+elif [[ $SHELL != */bin/xonsh ]];then
+    exec /etc/X11/xinit/Xsession $@
+fi
+
+. /etc/X11/xinit/xinitrc-common
+
+# Load Xsession scripts
+xsessionddir="/etc/X11/Xsession.d"
+if [ -d "$xsessionddir" ]; then
+    for i in `ls $xsessionddir`; do
+        script="$xsessionddir/$i"
+        echo "Loading X session script $script"
+        if [ -r "$script"  -a -f "$script" ] && expr "$i" : '^[[:alnum:]_-]\+$' > /dev/null; then
+            . "$script"
+        fi
+    done
+fi
+
+dde=$(which $1)
+exec $SSH_AGENT /bin/sh -c "exec $SHELL -l -c 'exec $dde'"
+
